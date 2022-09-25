@@ -1,4 +1,4 @@
-- **Reconhecimento de Síntese de Fala**
+- **Reconhecimento e Síntese de Fala**
   -  Use os recursos de conversão de fala em texto do serviço de Fala para transformar fala audível em texto - áudio para texto
   -  Use os recursos de conversão de texto em fala do serviço de Fala para gerar fala audivel a partir de um texto - texto para áudio
    
