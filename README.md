@@ -2,6 +2,10 @@
   -  Uso dos recursos de conversão de fala em texto do serviço de Fala para transformar fala audível em texto - áudio para texto
   -  Uso dos recursos de conversão de texto em fala do serviço de Fala para gerar fala audivel a partir de um texto - texto para áudio
   
+- **Processamento de Linguagem Natural**
+  - Serviços Cognitivos do Microsoft Azure
+    - Speech
+
 - **Criação do projeto - no Visual Studio**
 
   1. O primeiro passo foi iniciar um projeto simples de console:
