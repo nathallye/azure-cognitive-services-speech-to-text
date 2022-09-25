@@ -267,3 +267,9 @@
       }
     }
     ```
+    
+    11. Agora, conseguimos executar nossa aplicação e testá-la:
+    
+      ![image](https://user-images.githubusercontent.com/86172286/192129025-abc0c2c5-b7c3-4758-9804-154f1c4a5b90.png)
+
+    
