@@ -151,7 +151,7 @@
         {
           Console.WriteLine("Hello, girl!");
           var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
-          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
           var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
           Console.WriteLine("Pronto falei!");
         }
@@ -174,7 +174,7 @@
         {
           Console.WriteLine("Hello, girl!");
           var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
-          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
           var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
           Console.WriteLine("Pronto falei!");
 
@@ -199,7 +199,7 @@
         {
           Console.WriteLine("Hello, girl!");
           var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
-          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
           var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
           Console.WriteLine("Pronto falei!");
 
@@ -225,11 +225,11 @@
         {
           Console.WriteLine("Hello, girl!");
           var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
-          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
           var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
           Console.WriteLine("Pronto falei!");
 
-          var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+          var result = await recognizer.RecognizeOnceAsync();  
           var text = result.Text;
 
           Console.WriteLine($"Reconhecido: {text}");
@@ -253,11 +253,11 @@
         {
           Console.WriteLine("Hello, girl!");
           var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
-          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
           var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
           Console.WriteLine("Pronto falei!");
 
-          var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+          var result = await recognizer.RecognizeOnceAsync(); 
           var text = result.Text;
 
           Console.WriteLine($"Reconhecido: {text}");
@@ -273,3 +273,38 @@
       ![image](https://user-images.githubusercontent.com/86172286/192129025-abc0c2c5-b7c3-4758-9804-154f1c4a5b90.png)
 
     
+    12. Pronto, a aplicação já está reconhecendo o áudio da fonte configurada e escrevendo no console o que foi dito. Para melhorar, vamos usar um `while` para que ele continue escutando até que seja escrito no terminal a palavra `sair`:
+
+      ``` C#
+      using System;
+      using Microsoft.CognitiveServices.Speech;
+      using Microsoft.CognitiveServices.Speech.Audio;
+
+      namespace Mic
+      {
+        class Program
+        {
+          static async Task Main(string[] args)
+          {
+            Console.WriteLine("Hello, girl!");
+            var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+            var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+            var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+            Console.WriteLine("Parei de falar!");
+
+            while(true)
+            {
+              var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+              var text = result.Text;
+      
+              Console.WriteLine($"Reconhecido: {text}");
+              if (text.ToLower().Contains("sair"))
+              {
+                break;
+              }
+            }
+            Console.ReadKey(); // método para aguardar que o usuário pressione a tecla Enter antes de encerrar o aplicativo
+          }
+        }
+      }
+      ```
