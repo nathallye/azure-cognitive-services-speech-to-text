@@ -75,4 +75,195 @@
       
       ![image](https://user-images.githubusercontent.com/86172286/192128224-1c156b3d-ae11-4c15-b23c-e83e56904998.png)
       
+      ``` C#
+      using System;
+      using Microsoft.CognitiveServices.Speech;
+      using Microsoft.CognitiveServices.Speech.Audio;
 
+      namespace Mic
+      {
+        class Program
+        {
+          static void Main(string[] args)
+          {
+            Console.WriteLine("Hello, girl!");
+            var config = SpeechConfig.FromSubscription("subscription_KEY 1", "subscription_Location/Region");
+          }
+        }
+      }
+      ```
+    
+  5. Capturando o áudio do microfone padrão configurado na máquina:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static void Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth");
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+        }
+      }
+    }
+    ```
+
+  6. Após capturarmos o áudio precisamos reconhecer/`recognizer` esse áudio. Para isso, vamos criar uma nova instância de `SpeeachRecognizer` passando o `config`(que contém as informações do id subscription), o idiona que queremos reconher nesse áudio que no caso é `pt-br` e o audio capturado `audioConfig`:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static void Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth");
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+        }
+      }
+    }
+    ```
+
+  7. Para ficar claro que falamos no microfone vamos exibir um console depois que o áudio for capturado:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static void Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+          Console.WriteLine("Pronto falei!");
+        }
+      }
+    }
+    ```  
+
+  8. E para capturarmos esse resultado de forma assíncrona primeiramente vamos mudar o método de `static void Main` para `static assyn Task Main` em seguida vamos armazenar dentro da variável `result` a retornada do `recognizer`:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static async Task Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+          Console.WriteLine("Pronto falei!");
+
+          var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+        }
+      }
+    }
+    ```
+
+  E de dentro dessa promise armazenada em `result` vamos pegar o valor texto e armazená-lo em na variável `text`:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static async Task Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+          Console.WriteLine("Pronto falei!");
+
+          var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+          var text = result.Text;
+        }
+      }
+    }
+    ```
+  
+  9. Agora podemos escrever na tela o texto reconhecido:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static async Task Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+          Console.WriteLine("Pronto falei!");
+
+          var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+          var text = result.Text;
+
+          Console.WriteLine($"Reconhecido: {text}");
+        }
+      }
+    }
+    ```
+
+    10. E para ele depois que exibir o console continue esperando "na linha" ao invés de encerrar a aplicação vamos usar o `ReadKey`:
+
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
+
+    namespace Mic
+    {
+      class Program
+      {
+        static async Task Main(string[] args)
+        {
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+          Console.WriteLine("Pronto falei!");
+
+          var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+          var text = result.Text;
+
+          Console.WriteLine($"Reconhecido: {text}");
+          
+          Console.ReadKey(); // método para aguardar que o usuário pressione a tecla Enter antes de encerrar o aplicativo
+        }
+      }
+    }
+    ```
