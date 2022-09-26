@@ -272,43 +272,43 @@
     }
     ```
     
-    11. Agora, conseguimos executar nossa aplicação e testá-la:
+    11. Agora, conseguimos executar nossa aplicação e testar:
     
-      ![image](https://user-images.githubusercontent.com/86172286/192129025-abc0c2c5-b7c3-4758-9804-154f1c4a5b90.png)
+     ![image](https://user-images.githubusercontent.com/86172286/192172037-cb4cf978-8eae-4157-bfd6-26288a771b7b.png)
 
     
     12. Pronto, a aplicação já está reconhecendo o áudio da fonte configurada e escrevendo no console o que foi dito. Para melhorar, vamos usar um `while` para que ele continue escutando até que seja escrito no terminal a palavra `sair`:
 
-      ``` C#
-      using System;
-      using Microsoft.CognitiveServices.Speech;
-      using Microsoft.CognitiveServices.Speech.Audio;
+    ``` C#
+    using System;
+    using Microsoft.CognitiveServices.Speech;
+    using Microsoft.CognitiveServices.Speech.Audio;
 
-      namespace Mic
+    namespace Mic
+    {
+      class Program
       {
-        class Program
+        static async Task Main(string[] args)
         {
-          static async Task Main(string[] args)
-          {
-            Console.WriteLine("Hello, girl!");
-            var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
-            var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
-            var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
-            Console.WriteLine("Parei de falar!");
+          Console.WriteLine("Hello, girl!");
+          var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
+          var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
+          var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
+          Console.WriteLine("Parei de falar!");
 
-            while(true)
+          while(true)
+          {
+            var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
+            var text = result.Text;
+
+            Console.WriteLine($"Reconhecido: {text}");
+            if (text.ToLower().Contains("sair"))
             {
-              var result = await recognizer.RecognizeOnceAsync(); // await é utilizado para esperar por uma Promise. 
-              var text = result.Text;
-      
-              Console.WriteLine($"Reconhecido: {text}");
-              if (text.ToLower().Contains("sair"))
-              {
-                break;
-              }
+              break;
             }
-            Console.ReadKey(); // método para aguardar que o usuário pressione a tecla Enter antes de encerrar o aplicativo
           }
+          Console.ReadKey(); // método para aguardar que o usuário pressione a tecla Enter antes de encerrar o aplicativo
         }
       }
-      ```
+    }
+    ```
