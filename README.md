@@ -90,6 +90,7 @@
         static void Main(string[] args)
         {
           Console.WriteLine("Hello, girl!");
+          
           var config = SpeechConfig.FromSubscription("subscription_KEY 1", "subscription_Location/Region");
         }
       }
@@ -110,6 +111,7 @@
       static void Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth");
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
       }
@@ -131,6 +133,7 @@
       static void Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth");
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
@@ -153,6 +156,7 @@
       static void Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
@@ -176,6 +180,7 @@
       static async Task Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
@@ -201,6 +206,7 @@
       static async Task Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
@@ -227,6 +233,7 @@
       static async Task Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
@@ -255,6 +262,7 @@
       static async Task Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); 
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
@@ -290,6 +298,7 @@
       static async Task Main(string[] args)
       {
         Console.WriteLine("Hello, girl!");
+        
         var config = SpeechConfig.FromSubscription("eb5677582e83409cadbbd7a191f382f7", "brazilsouth"); 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput(); // esse áudio pode ter outras origens ao invés do microfone, por exemplo de um file
         var recognizer = new SpeechRecognizer(config, "pt-br", audioConfig);
