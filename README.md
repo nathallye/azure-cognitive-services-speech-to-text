@@ -8,7 +8,7 @@
   - Serviços Cognitivos do Microsoft Azure
     - Speech
 
-- **Criação do projeto - no Visual Studio**
+## Criação do projeto - no Visual Studio
 
   1. O primeiro passo foi iniciar um projeto simples de console:
   
