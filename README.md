@@ -1,4 +1,6 @@
-- **Reconhecimento e Síntese de Fala**
+# Aplicativo de Reconhecimento e Síntese de Fala usando os Serviços Cognitivos da Microsoft.
+
+## **Reconhecimento e Síntese de Fala**
   -  Uso dos recursos de conversão de fala em texto do serviço de Fala para transformar fala audível em texto - áudio para texto
   -  Uso dos recursos de conversão de texto em fala do serviço de Fala para gerar fala audivel a partir de um texto - texto para áudio
   
